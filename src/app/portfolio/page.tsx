@@ -17,14 +17,14 @@ export default function PortfolioPage() {
     setMounted(true);
   }, []);
 
-  // 获取所有 vaults
+  // Get all vaults
   const allVaults = [
     ...sepoliaContracts.conservativeVaults,
     ...sepoliaContracts.balancedVaults,
     ...sepoliaContracts.aggressiveVaults,
   ];
 
-  // 读取用户 shares
+  // Read user shares
   const { data: userSharesData } = useReadContracts({
     contracts: allVaults.map((v) => ({
       address: v.vault as `0x${string}`,
@@ -37,7 +37,7 @@ export default function PortfolioPage() {
     },
   });
 
-  // 读取 totalAssets
+  // Read totalAssets
   const { data: totalAssetsData } = useReadContracts({
     contracts: allVaults.map((v) => ({
       address: v.vault as `0x${string}`,
@@ -49,7 +49,7 @@ export default function PortfolioPage() {
     },
   });
 
-  // 读取 totalSupply
+  // Read totalSupply
   const { data: totalSupplyData } = useReadContracts({
     contracts: allVaults.map((v) => ({
       address: v.vault as `0x${string}`,
@@ -61,7 +61,7 @@ export default function PortfolioPage() {
     },
   });
 
-  // 读取 asset decimals
+  // Read asset decimals
   const { data: decimalsData } = useReadContracts({
     contracts: allVaults.map((v) => ({
       address: v.vault as `0x${string}`,
@@ -73,7 +73,7 @@ export default function PortfolioPage() {
     },
   });
 
-  // 计算持仓
+  // Calculate positions
   const positions = allVaults.map((vault, i) => {
     const userShares = userSharesData?.[i]?.result as bigint | undefined;
     const totalAssets = totalAssetsData?.[i]?.result as bigint | undefined;
@@ -82,7 +82,7 @@ export default function PortfolioPage() {
 
     if (!userShares || userShares === BigInt(0)) return null;
 
-    // 计算用户资产价值：(userShares * totalAssets) / totalSupply
+    // Calculate user asset value: (userShares * totalAssets) / totalSupply
     let userAssets = BigInt(0);
     if (totalSupply && totalSupply > BigInt(0) && totalAssets) {
       userAssets = (userShares * totalAssets) / totalSupply;
@@ -91,7 +91,7 @@ export default function PortfolioPage() {
     const formattedShares = decimals ? formatUnits(userShares, decimals) : "0";
     const formattedAssets = decimals ? formatUnits(userAssets, decimals) : "0";
 
-    // 判断策略类型（根据在数组中的索引）
+    // Determine strategy type (based on index in array)
     const conservativeCount = sepoliaContracts.conservativeVaults.length;
     const balancedCount = sepoliaContracts.balancedVaults.length;
     
@@ -118,7 +118,7 @@ export default function PortfolioPage() {
     };
   }).filter(Boolean);
 
-  // 计算总价值
+  // Calculate total value
   const totalValue = positions.reduce((sum, pos) => {
     if (pos) {
       return sum + parseFloat(pos.formattedAssets);

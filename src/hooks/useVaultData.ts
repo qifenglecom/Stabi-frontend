@@ -15,7 +15,7 @@ export function useVaultData(vaultConfig: VaultConfig | undefined) {
 
   const contracts = vaultConfig
     ? [
-        // Vault 数据
+        // Vault data
         {
           address: vaultConfig.vault,
           abi: vaultAbi,
@@ -37,7 +37,7 @@ export function useVaultData(vaultConfig: VaultConfig | undefined) {
           abi: vaultAbi,
           functionName: "decimals",
         },
-        // Asset 数据
+        // Asset data
         {
           address: vaultConfig.asset,
           abi: erc20Abi,
@@ -98,7 +98,7 @@ export function useVaultData(vaultConfig: VaultConfig | undefined) {
   const assetDecimals = (data[6]?.result as number) || 6;
   const assetSymbol = (data[7]?.result as string) || "USDC";
 
-  // 计算用户资产：(userShares * totalAssets) / totalSupply
+  // Calculate user assets: (userShares * totalAssets) / totalSupply
   const userAssets =
     totalSupply > BigInt(0) ? (userShares * totalAssets) / totalSupply : BigInt(0);
 

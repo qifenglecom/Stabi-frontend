@@ -2,6 +2,9 @@
 export const contracts = {
   chainId: 11155111,
   chainName: "sepolia",
+  // Aave V3 Sepolia contracts
+  aavePoolAddressesProvider: "0x012bAC54348C0E635dCAc9D5FB99f06F24136C9A" as `0x${string}`,
+  aavePool: "0x6Ae43d3271ff6888e7Fc43Fd7321a503ff738951" as `0x${string}`,
   conservativeVaults: [
     {
         index: 0,

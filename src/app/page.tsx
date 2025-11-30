@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { PropsWithChildren, useEffect, useRef, useState } from "react";
+import { Logo } from "@/components/logo";
 
 function RevealSection({ children }: PropsWithChildren) {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -391,34 +392,7 @@ export default function LandingPage() {
         <div className="grid gap-10 md:grid-cols-[1.2fr_1fr_1fr_1fr]">
           {/* Brand Column */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2.5">
-              {/* Logo */}
-              <div className="relative">
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-sky-400 via-indigo-500 to-emerald-400 opacity-20 blur-lg"></div>
-                <svg className="relative h-8 w-8" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M20 2L6 8v10c0 8.5 5.5 16.5 14 18.5 8.5-2 14-10 14-18.5V8L20 2z"
-                    fill="url(#shield-gradient-footer)"
-                  />
-                  <path
-                    d="M12 24l4-4 3 3 7-9"
-                    stroke="#0f172a"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <circle cx="26" cy="14" r="2" fill="#0f172a" />
-                  <defs>
-                    <linearGradient id="shield-gradient-footer" x1="6" y1="2" x2="34" y2="38.5" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="#38bdf8" />
-                      <stop offset="0.5" stopColor="#6366f1" />
-                      <stop offset="1" stopColor="#34d399" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-              <div className="text-[18px] font-bold text-slate-50">Stabi</div>
-            </div>
+            <Logo showText={true} />
             <p className="max-w-xs text-[13px] leading-relaxed text-slate-400">
               Simplified yield strategies for stablecoins. Earn steady returns without DeFi complexity.
             </p>

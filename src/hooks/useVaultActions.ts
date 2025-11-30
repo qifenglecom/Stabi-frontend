@@ -9,7 +9,7 @@ export function useVaultActions() {
     hash,
   });
 
-  // 授权 USDC 给 Vault
+  // Approve asset to Vault
   const approve = async (
     assetAddress: `0x${string}`,
     vaultAddress: `0x${string}`,
@@ -26,7 +26,7 @@ export function useVaultActions() {
     });
   };
 
-  // 存入资产到 Vault
+  // Deposit asset to Vault
   const deposit = async (
     vaultAddress: `0x${string}`,
     amount: string,
@@ -43,7 +43,7 @@ export function useVaultActions() {
     });
   };
 
-  // 赎回份额
+  // Redeem shares
   const redeem = async (
     vaultAddress: `0x${string}`,
     shares: string,
@@ -61,7 +61,7 @@ export function useVaultActions() {
     });
   };
 
-  // 提现资产
+  // Withdraw asset
   const withdraw = async (
     vaultAddress: `0x${string}`,
     amount: string,

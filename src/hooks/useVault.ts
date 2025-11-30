@@ -4,7 +4,7 @@ import { useChainId } from "wagmi";
 import { CONTRACTS_BY_CHAIN } from "@/config";
 import { contracts as sepoliaContracts } from "@/config/contracts/sepolia";
 
-// Vault key 基于 sepolia conservativeVaults 的 key 字段
+// Vault key based on the key field of sepolia conservativeVaults
 export type VaultKey =
   (typeof sepoliaContracts.conservativeVaults)[number]["key"];
 

@@ -7,6 +7,7 @@ import { formatUnits } from "viem";
 import { contracts as sepoliaContracts } from "@/config/contracts/sepolia";
 import vaultArtifact from "@/abis/stabi/vault.json";
 import { DepositWithdrawModal } from "@/components/deposit-withdraw-modal";
+import { APYDisplay } from "@/components/apy-display";
 
 const vaultAbi = (vaultArtifact as any).abi ?? (vaultArtifact as any);
 
@@ -367,12 +368,7 @@ export default function AppPage() {
                             </span>
                           </div>
                           {/* APY Badge */}
-                          <div className="flex flex-col items-end gap-1">
-                            <div className="text-[11px] text-slate-500">Est. APY</div>
-                            <div className="text-[20px] font-bold text-emerald-300">
-                              ~4.2%
-                            </div>
-                          </div>
+                          <APYDisplay assetAddress={v.asset} colorClass="emerald" />
                         </div>
                         <p className="mt-4 text-[13px] leading-relaxed text-slate-400">
                           {isLink
@@ -551,6 +547,8 @@ export default function AppPage() {
                                 Balanced vault
                               </span>
                             </div>
+                            {/* APY Badge */}
+                            <APYDisplay assetAddress={v.asset} colorClass="sky" />
                           </div>
                           <p className="mt-4 text-[14px] leading-relaxed text-slate-400">
                             Configured via contracts mapping. Once deployed on-chain,
@@ -719,6 +717,8 @@ export default function AppPage() {
                                 Aggressive vault
                               </span>
                             </div>
+                            {/* APY Badge */}
+                            <APYDisplay assetAddress={v.asset} colorClass="fuchsia" />
                           </div>
                           <p className="mt-4 text-[14px] leading-relaxed text-slate-400">
                             Configured via contracts mapping. Once deployed and

@@ -30,13 +30,13 @@ export function DepositWithdrawModal({
   const vaultData = useVaultData(vaultConfig);
   const actions = useVaultActions();
 
-  // 友好的错误消息处理
+  // User-friendly error message handler
   const getErrorMessage = (error: any): string => {
     if (!error) return "";
     
     const errorStr = error.message || error.toString();
     
-    // 用户取消交易
+    // User cancelled transaction
     if (errorStr.includes("User rejected") || 
         errorStr.includes("User denied") ||
         errorStr.includes("user rejected") ||
@@ -44,52 +44,52 @@ export function DepositWithdrawModal({
       return "Transaction cancelled";
     }
     
-    // 余额不足
+    // Insufficient balance
     if (errorStr.includes("insufficient funds") || 
         errorStr.includes("insufficient balance")) {
       return "Insufficient balance";
     }
     
-    // Gas 不足
+    // Insufficient gas
     if (errorStr.includes("gas") || errorStr.includes("Gas")) {
       return "Insufficient gas fee";
     }
     
-    // 网络错误
+    // Network error
     if (errorStr.includes("network") || errorStr.includes("Network")) {
       return "Network error. Please try again.";
     }
     
-    // 其他错误显示简短消息
+    // Show brief message for other errors
     return "Transaction failed. Please try again.";
   };
 
-  // 当 approve 成功后，刷新数据并重置到输入状态
+  // After approve succeeds, refresh data and reset to input state
   useEffect(() => {
     if (actions.isSuccess && step === "approving") {
-      // 刷新授权额度
+      // Refresh allowance
       vaultData.refetch();
-      setErrorMessage(""); // 清除错误消息
-      // 重置到输入状态，按钮会自动变成 Deposit
+      setErrorMessage(""); // Clear error message
+      // Reset to input state, button will automatically become Deposit
       setTimeout(() => {
         setStep("input");
       }, 1500);
     }
   }, [actions.isSuccess, step, vaultData]);
 
-  // 当 deposit/withdraw 成功时，显示成功状态
+  // Show success state when deposit/withdraw succeeds
   useEffect(() => {
     if (actions.isSuccess && step === "transacting") {
       setStep("success");
-      setErrorMessage(""); // 清除错误消息
-      // 刷新数据
+      setErrorMessage(""); // Clear error message
+      // Refresh data
       setTimeout(() => {
         vaultData.refetch();
       }, 1000);
     }
   }, [actions.isSuccess, step, vaultData]);
 
-  // 监听错误并设置友好的错误消息
+  // Listen for errors and set user-friendly error messages
   useEffect(() => {
     if (actions.error) {
       setErrorMessage(getErrorMessage(actions.error));
@@ -108,18 +108,18 @@ export function DepositWithdrawModal({
 
   const handleMaxClick = () => {
     setAmount(maxAmount);
-    setErrorMessage(""); // 清除错误消息
+    setErrorMessage(""); // Clear error message
   };
 
   const handleAmountChange = (value: string) => {
     setAmount(value);
-    setErrorMessage(""); // 清除错误消息
+    setErrorMessage(""); // Clear error message
   };
 
   const handleApprove = async () => {
     if (!address) return;
     setStep("approving");
-    setErrorMessage(""); // 清除之前的错误
+    setErrorMessage(""); // Clear previous error
     try {
       await actions.approve(
         vaultConfig.asset,
@@ -137,7 +137,7 @@ export function DepositWithdrawModal({
   const handleDeposit = async () => {
     if (!address) return;
     setStep("transacting");
-    setErrorMessage(""); // 清除之前的错误
+    setErrorMessage(""); // Clear previous error
     try {
       await actions.deposit(
         vaultConfig.vault,
@@ -155,7 +155,7 @@ export function DepositWithdrawModal({
   const handleWithdraw = async () => {
     if (!address) return;
     setStep("transacting");
-    setErrorMessage(""); // 清除之前的错误
+    setErrorMessage(""); // Clear previous error
     try {
       await actions.withdraw(
         vaultConfig.vault,
@@ -187,7 +187,7 @@ export function DepositWithdrawModal({
     if (step === "success") {
       vaultData.refetch();
     }
-    setErrorMessage(""); // 清除错误消息
+    setErrorMessage(""); // Clear error message
     onClose();
   };
 

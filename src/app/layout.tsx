@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "./providers";
 import { ConnectWalletButton } from "@/components/connect-wallet-button";
 import { NavLinks } from "@/components/nav-links";
+import { Logo } from "@/components/logo";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,8 +18,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Stabi dashboard",
-  description: "Stabi stable yield strategy layer portfolio overview",
+  title: "Stabi - Stable Yield Protocol",
+  description: "Simplified yield strategies for DeFi. Earn steady returns on your crypto assets without complexity.",
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({
@@ -36,35 +40,7 @@ export default function RootLayout({
             <header className="relative z-[9998] flex items-center justify-between rounded-2xl border border-slate-800/70 bg-slate-950/90 px-5 py-3 shadow-[0_0_40px_rgba(15,23,42,0.95)] backdrop-blur-xl md:px-6">
               <div className="flex items-center gap-6">
                 <Link href="/" className="group flex items-center gap-3 transition-transform hover:scale-105">
-                  {/* Professional Logo */}
-                  <div className="relative">
-                    <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-sky-400 via-indigo-500 to-emerald-400 opacity-30 blur-lg"></div>
-                    <svg className="relative h-9 w-9" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      {/* Shield background */}
-                      <path
-                        d="M20 2L6 8v10c0 8.5 5.5 16.5 14 18.5 8.5-2 14-10 14-18.5V8L20 2z"
-                        fill="url(#shield-gradient)"
-                        className="drop-shadow-[0_2px_8px_rgba(56,189,248,0.5)]"
-                      />
-                      {/* Upward trend line */}
-                      <path
-                        d="M12 24l4-4 3 3 7-9"
-                        stroke="#0f172a"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="drop-shadow-sm"
-                      />
-                      <circle cx="26" cy="14" r="2" fill="#0f172a" />
-                      <defs>
-                        <linearGradient id="shield-gradient" x1="6" y1="2" x2="34" y2="38.5" gradientUnits="userSpaceOnUse">
-                          <stop stopColor="#38bdf8" />
-                          <stop offset="0.5" stopColor="#6366f1" />
-                          <stop offset="1" stopColor="#34d399" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                  </div>
+                  <Logo className="h-9 w-9" />
                   <div className="hidden flex-col leading-tight sm:flex">
                     <span className="text-[17px] font-bold tracking-tight text-slate-50">
                       Stabi

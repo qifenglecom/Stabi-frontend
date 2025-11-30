@@ -14,7 +14,7 @@ function ConnectWalletButtonInner() {
   const [showCopyToast, setShowCopyToast] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  // 点击外部关闭菜单
+  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -25,7 +25,7 @@ function ConnectWalletButtonInner() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // 自动隐藏toast - 1秒后消失
+  // Auto-hide toast - disappear after 1 second
   useEffect(() => {
     if (showCopyToast) {
       const timer = setTimeout(() => setShowCopyToast(false), 1000);
@@ -62,7 +62,7 @@ function ConnectWalletButtonInner() {
     }
   };
 
-  // 未连接状态
+  // Disconnected state
   if (!isConnected) {
     return (
       <button
@@ -80,7 +80,7 @@ function ConnectWalletButtonInner() {
     );
   }
 
-  // 已连接状态 - 显示下拉菜单
+  // Connected state - show dropdown menu
   return (
     <div ref={menuRef} className="relative z-[9999]">
       <button
@@ -95,11 +95,11 @@ function ConnectWalletButtonInner() {
         </svg>
       </button>
 
-      {/* 下拉菜单 - 超紧凑版 */}
+      {/* Dropdown menu - ultra compact version */}
       {showMenu && (
         <div className="absolute right-0 top-full z-[9999] mt-2 w-60 rounded-lg border border-slate-700/70 bg-slate-900/98 shadow-[0_20px_60px_rgba(0,0,0,0.9)] backdrop-blur-xl">
           <div className="p-2.5 space-y-2">
-            {/* 简短地址 - 可复制 */}
+            {/* Short address - copyable */}
             <div className="space-y-1">
               <div className="text-[9px] font-bold uppercase tracking-wider text-slate-500 px-0.5">Address</div>
               <button
@@ -114,7 +114,7 @@ function ConnectWalletButtonInner() {
               </button>
             </div>
 
-            {/* 余额 */}
+            {/* Balance */}
             {balance && (
               <div className="space-y-1">
                 <div className="text-[9px] font-bold uppercase tracking-wider text-slate-500 px-0.5">Balance</div>
@@ -127,7 +127,7 @@ function ConnectWalletButtonInner() {
               </div>
             )}
 
-            {/* 断开连接 */}
+            {/* Disconnect */}
             <div className="border-t border-slate-700/50 pt-2">
               <button
                 onClick={handleDisconnect}
@@ -166,7 +166,7 @@ export function ConnectWalletButton() {
   }, []);
 
   if (!mounted) {
-    // 初始 Hydration 阶段先渲染一个静态占位按钮，避免 wagmi 在 Hydrate 中触发状态更新
+    // Render a static placeholder button during initial Hydration to avoid wagmi triggering state updates during Hydrate
     return (
       <button
         type="button"
